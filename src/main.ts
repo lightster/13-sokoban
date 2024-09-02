@@ -6,11 +6,12 @@ import {
   TileEngine,
   dataAssets,
   initPointer,
-  keyPressed,
   SpriteSheet,
   imageAssets,
+  keyPressed,
 } from "kontra";
 import Player from "./Player.js";
+import Chest from "./Chest.js";
 
 let { canvas } = init();
 
@@ -35,6 +36,10 @@ load(
         frames: 85,
         frameRate: 1,
       },
+      chest: {
+        frames: [89, 90, 91],
+        frameRate: 20,
+      },
     },
   });
 
@@ -44,6 +49,19 @@ load(
   const playerObject = objectsLayer.objects.find(
     (object: { name: string }) => object.name === "player",
   );
+  const chestObject = objectsLayer.objects.find(
+    (object: { name: string }) => object.name === "chest",
+  );
+
+  let chestSprite = new Chest({
+    x: Math.floor(chestObject.x / tileEngine.tilewidth) * tileEngine.tilewidth,
+    y:
+      Math.floor(chestObject.y / tileEngine.tileheight) * tileEngine.tileheight,
+    animations: {
+      chest: dungeonSheet.animations.chest,
+    },
+  });
+  tileEngine.add(chestSprite);
 
   let playerSprite = new Player({
     x: Math.floor(playerObject.x / tileEngine.tilewidth) * tileEngine.tilewidth,
@@ -55,21 +73,6 @@ load(
     },
   });
   tileEngine.add(playerSprite);
-
-  function movePlayer(x: number, y: number) {
-    // console.log(x, y);
-    // if (
-    //   !tileEngine.layerCollidesWith("structures", {
-    //     anchor: playerSprite.anchor,
-    //     width: playerSprite.width,
-    //     height: playerSprite.height,
-    //     x,
-    //     y,
-    //   })
-    // ) {
-    playerSprite.moveTo({ x, y, tileEngine });
-    // }
-  }
 
   let loop = GameLoop({
     update: function () {

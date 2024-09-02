@@ -1,4 +1,13 @@
-import { angleToTarget, movePoint, SpriteClass, TileEngineClass } from "kontra";
+import {
+  angleToTarget,
+  movePoint,
+  SpriteClass,
+  TileEngine,
+  TileEngineClass,
+  GameObject,
+  GameObjectClass,
+  keyPressed,
+} from "kontra";
 
 type SuperProps = ConstructorParameters<typeof SpriteClass>[0];
 
@@ -42,7 +51,7 @@ export default class Player extends SpriteClass {
     this.advance();
 
     if (this.movingTo) {
-      const distancePerFrame = 1; // pixels
+      const distancePerFrame = 2; // pixels
       const angle = angleToTarget(this, this.movingTo);
       const { x: nextX, y: nextY } = movePoint(this, angle, distancePerFrame);
       let next = { x: Math.round(nextX), y: Math.round(nextY) };
