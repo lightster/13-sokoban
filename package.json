@@ -1,0 +1,22 @@
+{
+  "name": "@lightster/13-sokoban",
+  "version": "1.0.0",
+  "description": "Sokoban game for js13games 2024",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "rollup --config",
+    "watch": "rollup --config --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matt Light",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "kontra": "^10.0.2",
+    "prettier": "^3.3.3",
+    "rollup": "^4.21.1",
+    "tslib": "^2.7.0",
+    "typescript": "^5.5.4"
+  }
+}

@@ -1,0 +1,267 @@
+{ "columns":12,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"..\/assets\/tinytown.tsj"
+        }
+    },
+ "image":"kenney-tiny-town.png",
+ "imageheight":176,
+ "imagewidth":192,
+ "margin":0,
+ "name":"tinytown",
+ "objectalignment":"topleft",
+ "spacing":0,
+ "tilecount":132,
+ "tiledversion":"1.11.0",
+ "tileheight":16,
+ "tiles":[
+        {
+         "id":12,
+         "objectgroup":
+            {
+             "draworder":"index",
+             "name":"",
+             "objects":[
+                    {
+                     "height":14,
+                     "id":4,
+                     "name":"",
+                     "rotation":0,
+                     "type":"",
+                     "visible":true,
+                     "width":14,
+                     "x":2,
+                     "y":2
+                    }],
+             "opacity":1,
+             "type":"objectgroup",
+             "visible":true,
+             "x":0,
+             "y":0
+            }
+        }, 
+        {
+         "id":27,
+         "objectgroup":
+            {
+             "draworder":"index",
+             "name":"",
+             "objects":[
+                    {
+                     "height":16,
+                     "id":3,
+                     "name":"",
+                     "rotation":0,
+                     "type":"",
+                     "visible":true,
+                     "width":12,
+                     "x":2,
+                     "y":0
+                    }],
+             "opacity":1,
+             "type":"objectgroup",
+             "visible":true,
+             "x":0,
+             "y":0
+            }
+        }, 
+        {
+         "id":44,
+         "type":"fence"
+        }, 
+        {
+         "id":45,
+         "type":"fence"
+        }, 
+        {
+         "id":46,
+         "type":"fence"
+        }, 
+        {
+         "id":47,
+         "type":"fence"
+        }, 
+        {
+         "id":56,
+         "type":"fence"
+        }, 
+        {
+         "id":57,
+         "type":"fence"
+        }, 
+        {
+         "id":58,
+         "type":"fence"
+        }, 
+        {
+         "id":59,
+         "type":"fence"
+        }, 
+        {
+         "id":68,
+         "type":"fence"
+        }, 
+        {
+         "id":69,
+         "type":"fence"
+        }, 
+        {
+         "id":70,
+         "type":"fence"
+        }, 
+        {
+         "id":71,
+         "type":"fence"
+        }, 
+        {
+         "id":80,
+         "type":"fence"
+        }, 
+        {
+         "id":81,
+         "type":"fence"
+        }, 
+        {
+         "id":82,
+         "type":"fence"
+        }, 
+        {
+         "id":83,
+         "type":"fence"
+        }],
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.10",
+ "wangsets":[
+        {
+         "colors":[
+                {
+                 "color":"#ff0000",
+                 "name":"grass",
+                 "probability":1,
+                 "tile":0
+                }, 
+                {
+                 "color":"#8efa00",
+                 "name":"dirt",
+                 "probability":1,
+                 "tile":25
+                }],
+         "name":"tinytown-landscape",
+         "tile":25,
+         "type":"corner",
+         "wangtiles":[
+                {
+                 "tileid":0,
+                 "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                }, 
+                {
+                 "tileid":12,
+                 "wangid":[0, 1, 0, 2, 0, 1, 0, 1]
+                }, 
+                {
+                 "tileid":13,
+                 "wangid":[0, 1, 0, 2, 0, 2, 0, 1]
+                }, 
+                {
+                 "tileid":14,
+                 "wangid":[0, 1, 0, 1, 0, 2, 0, 1]
+                }, 
+                {
+                 "tileid":24,
+                 "wangid":[0, 2, 0, 2, 0, 1, 0, 1]
+                }, 
+                {
+                 "tileid":25,
+                 "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                }, 
+                {
+                 "tileid":26,
+                 "wangid":[0, 1, 0, 1, 0, 2, 0, 2]
+                }, 
+                {
+                 "tileid":36,
+                 "wangid":[0, 2, 0, 1, 0, 1, 0, 1]
+                }, 
+                {
+                 "tileid":37,
+                 "wangid":[0, 2, 0, 1, 0, 1, 0, 2]
+                }, 
+                {
+                 "tileid":38,
+                 "wangid":[0, 1, 0, 1, 0, 1, 0, 2]
+                }, 
+                {
+                 "tileid":39,
+                 "wangid":[0, 2, 0, 2, 0, 2, 0, 1]
+                }, 
+                {
+                 "tileid":40,
+                 "wangid":[0, 1, 0, 2, 0, 2, 0, 2]
+                }, 
+                {
+                 "tileid":41,
+                 "wangid":[0, 2, 0, 1, 0, 2, 0, 2]
+                }, 
+                {
+                 "tileid":42,
+                 "wangid":[0, 2, 0, 2, 0, 1, 0, 2]
+                }]
+        }, 
+        {
+         "colors":[
+                {
+                 "color":"#ff0000",
+                 "name":"fence",
+                 "probability":1,
+                 "tile":-1
+                }],
+         "name":"tinytown-structures",
+         "tile":-1,
+         "type":"edge",
+         "wangtiles":[
+                {
+                 "tileid":44,
+                 "wangid":[0, 0, 1, 0, 1, 0, 0, 0]
+                }, 
+                {
+                 "tileid":45,
+                 "wangid":[0, 0, 1, 0, 0, 0, 1, 0]
+                }, 
+                {
+                 "tileid":46,
+                 "wangid":[0, 0, 0, 0, 1, 0, 1, 0]
+                }, 
+                {
+                 "tileid":47,
+                 "wangid":[0, 0, 0, 0, 1, 0, 0, 0]
+                }, 
+                {
+                 "tileid":59,
+                 "wangid":[1, 0, 0, 0, 1, 0, 0, 0]
+                }, 
+                {
+                 "tileid":68,
+                 "wangid":[1, 0, 1, 0, 0, 0, 0, 0]
+                }, 
+                {
+                 "tileid":70,
+                 "wangid":[1, 0, 0, 0, 0, 0, 1, 0]
+                }, 
+                {
+                 "tileid":71,
+                 "wangid":[1, 0, 0, 0, 0, 0, 0, 0]
+                }, 
+                {
+                 "tileid":80,
+                 "wangid":[0, 0, 1, 0, 0, 0, 0, 0]
+                }, 
+                {
+                 "tileid":82,
+                 "wangid":[0, 0, 0, 0, 0, 0, 1, 0]
+                }]
+        }]
+}
