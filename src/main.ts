@@ -26,7 +26,6 @@ load(
   "tiled/map.tmj",
 ).then(() => {
   let tileEngine = TileEngine(dataAssets["tiled/map"]);
-  console.log(tileEngine);
   const dungeonSheet = SpriteSheet({
     image: imageAssets["tiled/kenney-tiny-dungeon.png"],
     frameWidth: 16,
@@ -51,7 +50,9 @@ load(
     y:
       Math.floor(playerObject.y / tileEngine.tileheight) *
       tileEngine.tileheight,
-    animations: dungeonSheet.animations,
+    animations: {
+      player: dungeonSheet.animations.player,
+    },
   });
   tileEngine.add(playerSprite);
 
@@ -73,16 +74,16 @@ load(
   let loop = GameLoop({
     update: function () {
       if (keyPressed("arrowup")) {
-        movePlayer(playerSprite.x, playerSprite.y - 16);
+        playerSprite.move(0, -1);
       }
       if (keyPressed("arrowdown")) {
-        movePlayer(playerSprite.x, playerSprite.y + 16);
+        playerSprite.move(0, 1);
       }
       if (keyPressed("arrowleft")) {
-        movePlayer(playerSprite.x - 16, playerSprite.y);
+        playerSprite.move(-1, 0);
       }
       if (keyPressed("arrowright")) {
-        movePlayer(playerSprite.x + 16, playerSprite.y);
+        playerSprite.move(1, 0);
       }
 
       playerSprite.update();

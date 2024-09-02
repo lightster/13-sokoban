@@ -1,11 +1,13 @@
-import { angleToTarget, movePoint, SpriteClass, TileEngine } from "kontra";
+import { angleToTarget, movePoint, SpriteClass, TileEngineClass } from "kontra";
+
+type SuperProps = ConstructorParameters<typeof SpriteClass>[0];
 
 export default class Player extends SpriteClass {
   private movingTo: null | { x: number; y: number } = null;
 
-  init(properties: Parameters<InstanceType<typeof SpriteClass>["init"]>) {
+  init(props: SuperProps) {
     super.init({
-      ...properties,
+      ...props,
       width: 16,
       height: 16,
       anchor: { x: 0, y: 0 },
@@ -13,26 +15,21 @@ export default class Player extends SpriteClass {
     this.playAnimation("player");
   }
 
-  moveTo({
-    x,
-    y,
-    tileEngine,
-  }: {
-    x: number;
-    y: number;
-    tileEngine: TileEngine;
-  }) {
+  move(dx: number, dy: number) {
     if (this.movingTo) {
       return;
     }
 
-    console.log({ y, mapheight: tileEngine.mapheight });
+    const x = this.x + Math.sign(dx) * 16;
+    const y = this.y + Math.sign(dy) * 16;
+
     if (
+      this.parent instanceof TileEngineClass &&
       x >= 0 &&
-      x < tileEngine.mapwidth &&
+      x < this.parent.mapwidth &&
       y >= 0 &&
-      y < tileEngine.mapheight &&
-      !tileEngine.tileAtLayer("structures", {
+      y < this.parent.mapheight &&
+      !this.parent.tileAtLayer("structures", {
         x: x,
         y: y,
       })
