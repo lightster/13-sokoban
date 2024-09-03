@@ -21,9 +21,13 @@ export default class Tileset {
           frames: 85,
           frameRate: 1,
         },
-        chest: {
+        chestClosed: {
+          frames: 89,
+        },
+        chestOpening: {
           frames: [89, 90, 91],
-          frameRate: 20,
+          frameRate: 10,
+          loop: false,
         },
       },
     });
@@ -55,7 +59,8 @@ export default class Tileset {
       x,
       y,
       animations: {
-        chest: this.dungeonSheet.animations.chest,
+        closed: this.dungeonSheet.animations.chestClosed,
+        opening: this.dungeonSheet.animations.chestOpening,
       },
     });
   }

@@ -10,6 +10,6 @@ export default class Chest extends SpriteClass {
       height: 16,
       anchor: { x: 0, y: 0 },
     });
-    this.playAnimation("chest");
+    this.playAnimation("closed");
   }
 }
