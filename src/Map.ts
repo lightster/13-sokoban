@@ -117,7 +117,27 @@ export default class Map {
   }
 
   movePlayer(dx: number, dy: number) {
-    this.player?.move(dx, dy);
+    if (!this.player || !this.tileEngine) {
+      return;
+    }
+
+    const proposedX = this.player.x + Math.sign(dx) * 16;
+    const proposedY = this.player.y + Math.sign(dy) * 16;
+
+    if (
+      proposedX < 0 ||
+      proposedX >= this.tileEngine.mapwidth ||
+      proposedY < 0 ||
+      proposedY >= this.tileEngine.mapheight ||
+      this.tileEngine.tileAtLayer("structures", {
+        x: proposedX,
+        y: proposedY,
+      })
+    ) {
+      return;
+    }
+
+    this.player.moveTo(proposedX, proposedY);
   }
 
   update() {

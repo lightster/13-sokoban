@@ -24,27 +24,12 @@ export default class Player extends SpriteClass {
     this.playAnimation("player");
   }
 
-  move(dx: number, dy: number) {
+  moveTo(x: number, y: number) {
     if (this.movingTo) {
       return;
     }
 
-    const x = this.x + Math.sign(dx) * 16;
-    const y = this.y + Math.sign(dy) * 16;
-
-    if (
-      this.parent instanceof TileEngineClass &&
-      x >= 0 &&
-      x < this.parent.mapwidth &&
-      y >= 0 &&
-      y < this.parent.mapheight &&
-      !this.parent.tileAtLayer("structures", {
-        x: x,
-        y: y,
-      })
-    ) {
-      this.movingTo = { x, y };
-    }
+    this.movingTo = { x, y };
   }
 
   update() {
