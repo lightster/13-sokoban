@@ -122,7 +122,7 @@ export default class Map {
   }
 
   movePlayer(dx: number, dy: number) {
-    if (!this.player || !this.tileEngine) {
+    if (!this.player || !this.tileEngine || this.player.isMoving()) {
       return;
     }
 

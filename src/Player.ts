@@ -15,6 +15,10 @@ export default class Player extends SpriteClass {
     this.playAnimation("player");
   }
 
+  isMoving(): boolean {
+    return !!this.movingTo;
+  }
+
   moveTo(x: number, y: number) {
     if (this.movingTo) {
       return;
