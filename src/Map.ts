@@ -114,10 +114,10 @@ export default class Map {
     x: number;
     y: number;
   }): ObjectType | undefined {
-    const index = this.getIndexFromCoordinate(coordinate);
+    const index = this.indexFromCoordinate(coordinate);
 
     return this.objects.find((object) => {
-      return this.getIndexFromCoordinate(object) === index;
+      return this.indexFromCoordinate(object) === index;
     });
   }
 
@@ -169,12 +169,12 @@ export default class Map {
     this.tileEngine?.render();
   }
 
-  private getIndexFromCell({ col, row }: { col: number; row: number }): number {
+  private indexFromCell({ col, row }: { col: number; row: number }): number {
     return row * this.mapAsset.width + col;
   }
 
-  private getIndexFromCoordinate({ x, y }: { x: number; y: number }): number {
-    return this.getIndexFromCell({
+  private indexFromCoordinate({ x, y }: { x: number; y: number }): number {
+    return this.indexFromCell({
       col: Math.floor(x / this.mapAsset.tilewidth),
       row: Math.floor(y / this.mapAsset.tileheight),
     });
