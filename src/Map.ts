@@ -73,23 +73,29 @@ export default class Map {
 
     this.objects = this.objectDefinitions.flatMap((object) => {
       if (object.type === "chest") {
-        return this.tileset.newChest({
-          x: object.x,
-          y: object.y,
-        });
+        return this.tileset.newChest(
+          this.roundCoordinates({
+            x: object.x,
+            y: object.y,
+          }),
+        );
       }
 
       if (object.type === "player") {
-        return this.tileset.newPlayer({
-          x: object.x,
-          y: object.y,
-        });
+        return this.tileset.newPlayer(
+          this.roundCoordinates({
+            x: object.x,
+            y: object.y,
+          }),
+        );
       }
 
       if (object.type === "vertical-cart") {
         return this.tileset.newCart({
-          x: object.x,
-          y: object.y,
+          ...this.roundCoordinates({
+            x: object.x,
+            y: object.y,
+          }),
           orientation: "vertical",
         });
       }
@@ -172,5 +178,21 @@ export default class Map {
       col: Math.floor(x / this.mapAsset.tilewidth),
       row: Math.floor(y / this.mapAsset.tileheight),
     });
+  }
+
+  private roundCoordinates({ x, y }: { x: number; y: number }): {
+    x: number;
+    y: number;
+  } {
+    return {
+      x:
+        Math.floor(
+          (x + this.mapAsset.tilewidth / 2) / this.mapAsset.tilewidth,
+        ) * this.mapAsset.tilewidth,
+      y:
+        Math.floor(
+          (y + this.mapAsset.tileheight / 2) / this.mapAsset.tileheight,
+        ) * this.mapAsset.tileheight,
+    };
   }
 }
