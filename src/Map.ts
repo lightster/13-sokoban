@@ -148,7 +148,10 @@ export default class Map {
       const cartProposedY = object.y + Math.sign(dy) * 16;
       const cartProposedCoordinate = { x: cartProposedX, y: cartProposedY };
 
-      if (this.tileEngine.tileAtLayer("structures", cartProposedCoordinate)) {
+      if (
+        this.tileEngine.tileAtLayer("structures", cartProposedCoordinate) ||
+        this.objectAtCoordinate(cartProposedCoordinate)
+      ) {
         return;
       }
 
