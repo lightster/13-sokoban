@@ -169,7 +169,7 @@ export default class Map {
   }
 
   private getIndexFromCell({ col, row }: { col: number; row: number }): number {
-    return row * this.mapAsset.width * col;
+    return row * this.mapAsset.width + col;
   }
 
   private getIndexFromCoordinate({ x, y }: { x: number; y: number }): number {
