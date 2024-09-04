@@ -2,7 +2,7 @@ import { angleToTarget, movePoint, SpriteClass } from "kontra";
 
 type SuperProps = ConstructorParameters<typeof SpriteClass>[0];
 
-export default class Player extends SpriteClass {
+export default class Cart extends SpriteClass {
   private movingTo: null | { x: number; y: number } = null;
 
   init(props: SuperProps) {
@@ -12,7 +12,7 @@ export default class Player extends SpriteClass {
       height: 16,
       anchor: { x: 0, y: 0 },
     });
-    this.playAnimation("player");
+    this.playAnimation("cart");
   }
 
   moveTo(x: number, y: number) {

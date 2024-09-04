@@ -2,6 +2,7 @@ import Player from "./Player.js";
 import Chest from "./Chest.js";
 import Map from "./Map.js";
 import { load, imageAssets, dataAssets, SpriteSheet, TileEngine } from "kontra";
+import Cart from "./Cart.js";
 
 const TINY_TOWN_PNG = "tiled/kenney-tiny-town.png";
 const TINY_TOWN_TILESET = "tiled/kenney-tiny-town.tsj";
@@ -29,6 +30,12 @@ export default class Tileset {
           frameRate: 10,
           loop: false,
         },
+        cartHorizontal: {
+          frames: 54,
+        },
+        cartVertical: {
+          frames: 55,
+        },
       },
     });
   }
@@ -50,6 +57,26 @@ export default class Tileset {
       y,
       animations: {
         player: this.dungeonSheet.animations.player,
+      },
+    });
+  }
+
+  newCart({
+    x,
+    y,
+    orientation,
+  }: {
+    x: number;
+    y: number;
+    orientation: "vertical" | "horizontal";
+  }): Cart {
+    return new Cart({
+      x,
+      y,
+      animations: {
+        cart: this.dungeonSheet.animations[
+          orientation === "vertical" ? "cartVertical" : "cartHorizontal"
+        ],
       },
     });
   }

@@ -1,14 +1,8 @@
-import {
-  load,
-  TileEngine,
-  dataAssets,
-  TileEngineClass,
-  keyPressed,
-  Scene,
-} from "kontra";
+import { load, TileEngine, dataAssets, Scene } from "kontra";
 import Player from "./Player.js";
 import Tileset from "./Tileset.js";
 import Chest from "./Chest.js";
+import Cart from "./Cart.js";
 
 interface TileLayer {
   type: "tilelayer";
@@ -42,46 +36,27 @@ interface Props extends Omit<Parameters<typeof TileEngine>[0], "layers"> {
   layers: Array<TileLayer | ObjectLayer>;
 }
 
+type ObjectType = Cart | Chest | Player;
+
 export default class Map {
-  private name: string;
   private mapAsset: Props;
   private tileset: Tileset;
   private scene: Scene;
-  private objectsByName: Record<string, ObjectTile | undefined>;
-  private objectsById: Record<number, ObjectTile | undefined>;
-  private objectsByCell: Record<number, ObjectTile | undefined>;
-  private layerMap: Record<
-    string,
-    TileLayer | Required<ObjectLayer> | undefined
-  >;
+  private objectDefinitions: Array<ObjectTile>;
+  private objects: Array<ObjectType>;
 
   // fields initialized in init instead of constructor to allow for reinit
-  public tileEngine?: TileEngine;
-  public player?: Player;
-  public chest?: Chest;
+  private tileEngine?: TileEngine;
+  private player?: Player;
 
   constructor(name: string, mapAsset: Props, tileset: Tileset) {
-    this.name = name;
     this.mapAsset = mapAsset;
     this.tileset = tileset;
     this.scene = Scene({ id: "map" });
-    this.objectsByName = {};
-    this.objectsById = {};
-    this.objectsByCell = {};
-    this.layerMap = mapAsset.layers.reduce((allLayers, layer) => {
-      if (layer.type === "objectgroup") {
-        layer.objects.forEach((object) => {
-          this.objectsByName[object.name] = object;
-          this.objectsById[object.id] = object;
-          this.objectsByCell[this.getIndexFromCoordinate(object)] = object;
-        });
-      }
-
-      return {
-        ...allLayers,
-        [layer.name]: layer,
-      };
-    }, {});
+    this.objectDefinitions = mapAsset.layers.flatMap((layer) => {
+      return layer.type === "objectgroup" ? layer.objects : [];
+    });
+    this.objects = [];
 
     this.init();
   }
@@ -96,34 +71,48 @@ export default class Map {
     this.scene = Scene({ id: "map" });
     this.tileEngine = TileEngine(this.mapAsset);
 
-    const chestObject = this.objectsByName["chest"];
-    if (chestObject) {
-      this.chest = this.tileset.newChest({
-        x: chestObject.x,
-        y: chestObject.y,
-      });
-      this.tileEngine.add(this.chest);
-      this.scene.add(this.chest);
-    }
+    this.objects = this.objectDefinitions.flatMap((object) => {
+      if (object.type === "chest") {
+        return this.tileset.newChest({
+          x: object.x,
+          y: object.y,
+        });
+      }
 
-    const playerObject = this.objectsByName["player"];
-    if (playerObject) {
-      this.player = this.tileset.newPlayer({
-        x: playerObject.x,
-        y: playerObject.y,
-      });
-      this.tileEngine.add(this.player);
-      this.scene.add(this.player);
-    }
+      if (object.type === "player") {
+        return this.tileset.newPlayer({
+          x: object.x,
+          y: object.y,
+        });
+      }
+
+      if (object.type === "vertical-cart") {
+        return this.tileset.newCart({
+          x: object.x,
+          y: object.y,
+          orientation: "vertical",
+        });
+      }
+
+      return [];
+    });
+
+    this.objects.forEach((object) => {
+      this.tileEngine?.add(object);
+      this.scene.add(object);
+    });
+    this.player = this.objects.find((object) => object instanceof Player);
   }
 
   objectAtCoordinate(coordinate: {
     x: number;
     y: number;
-  }): ObjectTile | undefined {
+  }): ObjectType | undefined {
     const index = this.getIndexFromCoordinate(coordinate);
 
-    return this.objectsByCell[index];
+    return this.objects.find((object) => {
+      return this.getIndexFromCoordinate(object) === index;
+    });
   }
 
   movePlayer(dx: number, dy: number) {
@@ -145,9 +134,19 @@ export default class Map {
     }
 
     const object = this.objectAtCoordinate(proposedCoordinate);
-    if (object && object.type === "chest") {
-      this.chest?.playAnimation("opening");
+    if (object instanceof Chest) {
+      object.open();
       return;
+    } else if (object instanceof Cart) {
+      const cartProposedX = object.x + Math.sign(dx) * 16;
+      const cartProposedY = object.y + Math.sign(dy) * 16;
+      const cartProposedCoordinate = { x: cartProposedX, y: cartProposedY };
+
+      if (this.tileEngine.tileAtLayer("structures", cartProposedCoordinate)) {
+        return;
+      }
+
+      object.moveTo(cartProposedX, cartProposedY);
     }
 
     if (this.tileEngine.tileAtLayer("structures", proposedCoordinate) === 0) {
@@ -156,10 +155,6 @@ export default class Map {
   }
 
   update() {
-    if (!this.player) {
-      return;
-    }
-
     this.scene.update();
   }
 
