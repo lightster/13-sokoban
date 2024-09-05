@@ -100,6 +100,16 @@ export default class Map {
         });
       }
 
+      if (object.type === "horizontal-cart") {
+        return this.tileset.newCart({
+          ...this.roundCoordinates({
+            x: object.x,
+            y: object.y,
+          }),
+          orientation: "horizontal",
+        });
+      }
+
       return [];
     });
 
@@ -155,7 +165,9 @@ export default class Map {
         return;
       }
 
-      object.moveTo(cartProposedX, cartProposedY);
+      if (!object.moveTo(cartProposedX, cartProposedY)) {
+        return;
+      }
     }
 
     if (this.tileEngine.tileAtLayer("structures", proposedCoordinate) === 0) {

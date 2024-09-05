@@ -157,8 +157,8 @@
                  "type":"vertical-cart",
                  "visible":true,
                  "width":16,
-                 "x":98,
-                 "y":176.5
+                 "x":285,
+                 "y":173
                 }, 
                 {
                  "gid":222,
@@ -181,8 +181,8 @@
                  "type":"vertical-cart",
                  "visible":true,
                  "width":16,
-                 "x":221,
-                 "y":125
+                 "x":287.5,
+                 "y":224
                 }, 
                 {
                  "gid":222,
@@ -205,8 +205,20 @@
                  "type":"vertical-cart",
                  "visible":true,
                  "width":16,
-                 "x":226,
-                 "y":96.5
+                 "x":270.5,
+                 "y":190
+                }, 
+                {
+                 "gid":187,
+                 "height":16,
+                 "id":11,
+                 "name":"cart",
+                 "rotation":0,
+                 "type":"horizontal-cart",
+                 "visible":true,
+                 "width":16,
+                 "x":270,
+                 "y":209
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -215,7 +227,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":11,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

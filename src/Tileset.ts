@@ -78,6 +78,7 @@ export default class Tileset {
           orientation === "vertical" ? "cartVertical" : "cartHorizontal"
         ],
       },
+      orientation,
     });
   }
 
