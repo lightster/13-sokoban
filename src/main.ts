@@ -18,7 +18,7 @@ Tileset.load().then((tileset) => {
 
       if (!map) {
         mapLoading = true;
-        Map.load("dungeon", tileset).then((m) => {
+        Map.load("sokoban", tileset).then((m) => {
           map = m;
           mapLoading = false;
         });
