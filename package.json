@@ -7,6 +7,7 @@
   "scripts": {
     "build": "rollup --config",
     "watch": "rollup --config --watch",
+    "zip": "npm run build && cd build && zip -r ../game.zip .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matt Light",
