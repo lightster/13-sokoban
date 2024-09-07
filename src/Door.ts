@@ -2,8 +2,9 @@ import { SpriteClass } from "kontra";
 
 type SuperProps = ConstructorParameters<typeof SpriteClass>[0];
 
-export default class Chest extends SpriteClass {
+export default class Door extends SpriteClass {
   private isOpening: boolean = false;
+  public isOpen: boolean = false;
 
   init(props: SuperProps) {
     super.init({
@@ -16,11 +17,20 @@ export default class Chest extends SpriteClass {
   }
 
   open() {
-    if (this.isOpening) {
+    if (this.isOpening || this.isOpen) {
       return;
     }
 
     this.playAnimation("opening");
     this.isOpening = true;
+    console.log(this.isOpening);
+  }
+
+  update() {
+    this.advance();
+
+    if (this.currentAnimation.isStopped && this.isOpening && !this.isOpen) {
+      this.isOpen = true;
+    }
   }
 }

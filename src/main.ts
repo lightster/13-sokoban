@@ -23,6 +23,13 @@ Tileset.load().then((tileset) => {
           mapLoading = false;
         });
         return;
+      } else if (map.levelComplete) {
+        mapLoading = true;
+        Map.load("sokoban", tileset).then((m) => {
+          map = m;
+          mapLoading = false;
+        });
+        return;
       }
 
       if (keyPressed("arrowup")) {

@@ -3,6 +3,7 @@ import Player from "./Player.js";
 import Tileset from "./Tileset.js";
 import Chest from "./Chest.js";
 import Cart from "./Cart.js";
+import Door from "./Door.js";
 
 interface TileLayer {
   type: "tilelayer";
@@ -36,7 +37,7 @@ interface Props extends Omit<Parameters<typeof TileEngine>[0], "layers"> {
   layers: Array<TileLayer | ObjectLayer>;
 }
 
-type ObjectType = Cart | Chest | Player;
+type ObjectType = Cart | Chest | Door | Player;
 
 export default class Map {
   private mapAsset: Props;
@@ -44,6 +45,7 @@ export default class Map {
   private scene: Scene;
   private objectDefinitions: Array<ObjectTile>;
   private objects: Array<ObjectType>;
+  public levelComplete: boolean = false;
 
   // fields initialized in init instead of constructor to allow for reinit
   private tileEngine?: TileEngine;
@@ -110,6 +112,15 @@ export default class Map {
         });
       }
 
+      if (object.type === "door") {
+        return this.tileset.newDoor({
+          ...this.roundCoordinates({
+            x: object.x,
+            y: object.y,
+          }),
+        });
+      }
+
       return [];
     });
 
@@ -152,6 +163,13 @@ export default class Map {
     const object = this.objectAtCoordinate(proposedCoordinate);
     if (object instanceof Chest) {
       object.open();
+      return;
+    } else if (object instanceof Door) {
+      if (!object.isOpen) {
+        object.open();
+      } else {
+        this.levelComplete = true;
+      }
       return;
     } else if (object instanceof Cart) {
       const cartProposedX = object.x + Math.sign(dx) * 16;
