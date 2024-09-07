@@ -64,8 +64,8 @@ export default class Map {
   }
 
   static async load(map: string, tileset: Tileset): Promise<Map> {
-    return load(`tiled/${map}.tmj`).then(() => {
-      return new Map(map, dataAssets[`tiled/${map}`], tileset);
+    return load(`assets/${map}.tmj`).then(() => {
+      return new Map(map, dataAssets[`assets/${map}`], tileset);
     });
   }
 

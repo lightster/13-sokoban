@@ -16,6 +16,8 @@
     "kontra": "^10.0.2",
     "prettier": "^3.3.3",
     "rollup": "^4.21.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-serve": "^1.1.1",
     "tslib": "^2.7.0",
     "typescript": "^5.5.4"
   }

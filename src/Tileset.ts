@@ -1,14 +1,13 @@
 import Player from "./Player.js";
 import Chest from "./Chest.js";
-import Map from "./Map.js";
-import { load, imageAssets, dataAssets, SpriteSheet, TileEngine } from "kontra";
+import { load, imageAssets, SpriteSheet } from "kontra";
 import Cart from "./Cart.js";
 import Door from "./Door.js";
 
-const TINY_TOWN_PNG = "tiled/kenney-tiny-town.png";
-const TINY_TOWN_TILESET = "tiled/kenney-tiny-town.tsj";
-const TINY_DUNGEON_PNG = "tiled/kenney-tiny-dungeon.png";
-const TINY_DUNGEON_TILESET = "tiled/kenney-tiny-dungeon.tsj";
+const TINY_TOWN_PNG = "assets/kenney-tiny-town.png";
+const TINY_TOWN_TILESET = "assets/kenney-tiny-town.tsj";
+const TINY_DUNGEON_PNG = "assets/kenney-tiny-dungeon.png";
+const TINY_DUNGEON_TILESET = "assets/kenney-tiny-dungeon.tsj";
 
 export default class Tileset {
   private dungeonSheet: SpriteSheet;
