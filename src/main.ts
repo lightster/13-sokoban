@@ -32,16 +32,16 @@ Tileset.load().then((tileset) => {
         return;
       }
 
-      if (keyPressed("arrowup")) {
+      if (keyPressed(["arrowup", "w"])) {
         map.movePlayer(0, -1);
       }
-      if (keyPressed("arrowdown")) {
+      if (keyPressed(["arrowdown", "s"])) {
         map.movePlayer(0, 1);
       }
-      if (keyPressed("arrowleft")) {
+      if (keyPressed(["arrowleft", "a"])) {
         map.movePlayer(-1, 0);
       }
-      if (keyPressed("arrowright")) {
+      if (keyPressed(["arrowright", "d"])) {
         map.movePlayer(1, 0);
       }
 
