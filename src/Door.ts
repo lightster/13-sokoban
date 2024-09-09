@@ -23,7 +23,6 @@ export default class Door extends SpriteClass {
 
     this.playAnimation("opening");
     this.isOpening = true;
-    console.log(this.isOpening);
   }
 
   update() {

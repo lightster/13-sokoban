@@ -19,18 +19,17 @@ export default [
       copy({
         targets: [
           { src: "index.html", dest: "build/" },
-
-          { src: "tiled/*.{tmj,png,tsj}", dest: "build/assets" },
+          { src: "tiled/sprites.png", dest: "build/assets" },
         ],
       }),
       typescript(),
       nodeResolve(),
       kontra({
+        gameObject: { scale: true },
         sprite: { animation: true },
         tileEngine: {
           camera: true,
           query: true,
-          tiled: true,
         },
         debug: isWatching,
       }),

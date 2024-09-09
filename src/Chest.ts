@@ -12,7 +12,7 @@ export default class Chest extends SpriteClass {
       height: 16,
       anchor: { x: 0, y: 0 },
     });
-    this.playAnimation("closed");
+    this.playAnimation("chestClosed");
   }
 
   open() {
@@ -20,7 +20,7 @@ export default class Chest extends SpriteClass {
       return;
     }
 
-    this.playAnimation("opening");
+    this.playAnimation("chestOpening");
     this.isOpening = true;
   }
 }

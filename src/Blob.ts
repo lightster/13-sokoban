@@ -1,3 +1,3 @@
 import InteractiveSprite from "./InteractiveSprite.js";
 
-export default class Cart extends InteractiveSprite {}
+export default class Blob extends InteractiveSprite {}

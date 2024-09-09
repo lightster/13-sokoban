@@ -1,26 +1,34 @@
-import { load, TileEngine, dataAssets, Scene } from "kontra";
+import { TileEngine, Scene } from "kontra";
 import Player from "./Player.js";
+import Blob from "./Blob.js";
 import Tileset from "./Tileset.js";
 import Chest from "./Chest.js";
 import Cart from "./Cart.js";
 import Door from "./Door.js";
+import {
+  MapSpec,
+  OBJECT_PLAYER,
+  OBJECT_BLOB,
+  OBJECT_CART_HORIZONTAL,
+  OBJECT_CART_VERTICAL,
+  OBJECT_CHEST,
+  OBJECT_DOOR,
+} from "./types.js";
+import map0 from "./maps/map0.js";
+import InteractiveSprite from "./InteractiveSprite.js";
+
+const maps: Array<MapSpec> = [map0] as const;
 
 interface TileLayer {
   type: "tilelayer";
   name: string;
-  width: number;
-  height: number;
   data: Array<number>;
 }
 
 interface ObjectTile {
-  id: number;
   type: string;
-  name: string;
-  height: number;
-  width: number;
-  x: number;
-  y: number;
+  row: number;
+  col: number;
 }
 
 interface ObjectLayer {
@@ -37,10 +45,10 @@ interface Props extends Omit<Parameters<typeof TileEngine>[0], "layers"> {
   layers: Array<TileLayer | ObjectLayer>;
 }
 
-type ObjectType = Cart | Chest | Door | Player;
+type ObjectType = Blob | Cart | Chest | Door | Player;
 
 export default class Map {
-  private mapAsset: Props;
+  private mapSpec: MapSpec;
   private tileset: Tileset;
   private scene: Scene;
   private objectDefinitions: Array<ObjectTile>;
@@ -51,74 +59,91 @@ export default class Map {
   private tileEngine?: TileEngine;
   private player?: Player;
 
-  constructor(name: string, mapAsset: Props, tileset: Tileset) {
-    this.mapAsset = mapAsset;
+  constructor(name: string, mapSpec: MapSpec, tileset: Tileset) {
+    this.mapSpec = mapSpec;
     this.tileset = tileset;
     this.scene = Scene({ id: "map" });
-    this.objectDefinitions = mapAsset.layers.flatMap((layer) => {
-      return layer.type === "objectgroup" ? layer.objects : [];
-    });
+
+    const objectString = this.mapSpec.objects.data.replace(/[\r\n]+/g, "");
+    this.objectDefinitions = Array(15 * 15)
+      .fill(0)
+      .flatMap((_, index) => {
+        return {
+          ...this.cellFromIndex(index),
+          type: objectString.charAt(index),
+        };
+      });
     this.objects = [];
 
     this.init();
   }
 
-  static async load(map: string, tileset: Tileset): Promise<Map> {
-    return load(`assets/${map}.tmj`).then(() => {
-      return new Map(map, dataAssets[`assets/${map}`], tileset);
-    });
+  static async load(name: string, tileset: Tileset): Promise<Map> {
+    const mapSpec = maps[0];
+
+    return new Map(name, mapSpec, tileset);
   }
 
   init() {
     this.scene = Scene({ id: "map" });
-    this.tileEngine = TileEngine(this.mapAsset);
+    this.tileEngine = TileEngine({
+      tilewidth: this.tileset.tileWidth, // tile size in pixels
+      tileheight: this.tileset.tileHeight,
+      width: this.mapSpec.width, // map dimensions in tiles
+      height: this.mapSpec.height,
+      tilesets: [
+        {
+          firstgid: 1,
+          image: this.tileset.image,
+        },
+      ],
+      layers: [
+        {
+          type: "tilelayer",
+          name: "background",
+          data: this.mapSpec.background.data.map((tile) => tile),
+        },
+        {
+          type: "tilelayer",
+          name: "structures",
+          data: this.mapSpec.structures.data.map((tile) => tile),
+        },
+      ],
+    });
 
-    this.objects = this.objectDefinitions.flatMap((object) => {
-      if (object.type === "chest") {
-        return this.tileset.newChest(
-          this.roundCoordinates({
-            x: object.x,
-            y: object.y,
-          }),
-        );
+    this.objects = this.objectDefinitions.flatMap(({ col, row, type }) => {
+      const coord = this.coordinateFromCell({ col, row });
+
+      if (type === OBJECT_CHEST) {
+        return this.tileset.newChest(coord);
       }
 
-      if (object.type === "player") {
-        return this.tileset.newPlayer(
-          this.roundCoordinates({
-            x: object.x,
-            y: object.y,
-          }),
-        );
+      if (type === OBJECT_PLAYER) {
+        return this.tileset.newPlayer(coord);
       }
 
-      if (object.type === "vertical-cart") {
+      if (type === OBJECT_CART_VERTICAL) {
         return this.tileset.newCart({
-          ...this.roundCoordinates({
-            x: object.x,
-            y: object.y,
-          }),
+          ...coord,
           orientation: "vertical",
         });
       }
 
-      if (object.type === "horizontal-cart") {
+      if (type === OBJECT_CART_HORIZONTAL) {
         return this.tileset.newCart({
-          ...this.roundCoordinates({
-            x: object.x,
-            y: object.y,
-          }),
+          ...coord,
           orientation: "horizontal",
         });
       }
 
-      if (object.type === "door") {
-        return this.tileset.newDoor({
-          ...this.roundCoordinates({
-            x: object.x,
-            y: object.y,
-          }),
+      if (type === OBJECT_BLOB) {
+        return this.tileset.newBlob({
+          ...coord,
         });
+      }
+
+      if (type === OBJECT_DOOR) {
+        return this.tileset.newDoor(coord);
       }
 
       return [];
@@ -171,7 +196,7 @@ export default class Map {
         this.levelComplete = true;
       }
       return;
-    } else if (object instanceof Cart) {
+    } else if (object instanceof InteractiveSprite) {
       const cartProposedX = object.x + Math.sign(dx) * 16;
       const cartProposedY = object.y + Math.sign(dy) * 16;
       const cartProposedCoordinate = { x: cartProposedX, y: cartProposedY };
@@ -203,29 +228,31 @@ export default class Map {
   }
 
   private indexFromCell({ col, row }: { col: number; row: number }): number {
-    return row * this.mapAsset.width + col;
+    return row * this.mapSpec.width + col;
   }
 
   private indexFromCoordinate({ x, y }: { x: number; y: number }): number {
     return this.indexFromCell({
-      col: Math.floor(x / this.mapAsset.tilewidth),
-      row: Math.floor(y / this.mapAsset.tileheight),
+      col: Math.floor(x / this.tileset.tileWidth),
+      row: Math.floor(y / this.tileset.tileHeight),
     });
   }
 
-  private roundCoordinates({ x, y }: { x: number; y: number }): {
+  private cellFromIndex(index: number): { col: number; row: number } {
+    const col = index % this.mapSpec.width;
+    return {
+      col,
+      row: (index - col) / this.mapSpec.width,
+    };
+  }
+
+  private coordinateFromCell({ col, row }: { col: number; row: number }): {
     x: number;
     y: number;
   } {
     return {
-      x:
-        Math.floor(
-          (x + this.mapAsset.tilewidth / 2) / this.mapAsset.tilewidth,
-        ) * this.mapAsset.tilewidth,
-      y:
-        Math.floor(
-          (y + this.mapAsset.tileheight / 2) / this.mapAsset.tileheight,
-        ) * this.mapAsset.tileheight,
+      x: col * this.tileset.tileWidth,
+      y: row * this.tileset.tileHeight,
     };
   }
 }
