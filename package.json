@@ -5,8 +5,9 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "build": "rollup --config",
-    "watch": "rollup --config --watch",
+    "build": "rollup --config && npm run maps",
+    "maps": "node bin/tiled2bin.js tiled build/assets",
+    "watch": "npm run build && rollup --config --watch",
     "clean": "rm -rf build game.zip",
     "zip": "npm run clean && npm run build && (cd build && zip -r ../game.zip .) && ls -l game.zip",
     "test": "echo \"Error: no test specified\" && exit 1"

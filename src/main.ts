@@ -6,6 +6,9 @@ init();
 initPointer();
 initKeys();
 
+const LAST_MAP_NUMBER = 5;
+let mapNumber = 0;
+
 Tileset.load().then((tileset) => {
   let map: Map | undefined;
   let mapLoading: boolean = false;
@@ -16,17 +19,13 @@ Tileset.load().then((tileset) => {
         return;
       }
 
-      if (!map) {
+      if (!map || map.levelComplete) {
         mapLoading = true;
-        Map.load("sokoban", tileset).then((m) => {
+
+        mapNumber = (mapNumber + 1) % LAST_MAP_NUMBER;
+        Map.load(mapNumber, tileset).then((m) => {
           map = m;
-          mapLoading = false;
-        });
-        return;
-      } else if (map.levelComplete) {
-        mapLoading = true;
-        Map.load("sokoban", tileset).then((m) => {
-          map = m;
+
           mapLoading = false;
         });
         return;

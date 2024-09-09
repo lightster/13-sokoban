@@ -1,0 +1,14 @@
+{ "columns":28,
+ "image":"sprites.png",
+ "imageheight":48,
+ "imagewidth":448,
+ "margin":0,
+ "name":"sprites",
+ "spacing":0,
+ "tilecount":84,
+ "tiledversion":"1.11.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.10"
+}

@@ -131,3 +131,4 @@ dist
 
 build/
 *.tiled-session
+bin/tiled2bin.js

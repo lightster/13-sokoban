@@ -37,4 +37,12 @@ export default [
       !isWatching && terser(),
     ],
   },
+  {
+    input: "src/tiled2bin.ts",
+    output: {
+      file: "bin/tiled2bin.js",
+      format: "esm",
+    },
+    plugins: [typescript(), nodeResolve()],
+  },
 ];

@@ -13,7 +13,7 @@ export default class Door extends SpriteClass {
       height: 16,
       anchor: { x: 0, y: 0 },
     });
-    this.playAnimation("closed");
+    this.playAnimation("doorClosed");
   }
 
   open() {
@@ -21,7 +21,7 @@ export default class Door extends SpriteClass {
       return;
     }
 
-    this.playAnimation("opening");
+    this.playAnimation("doorOpen");
     this.isOpening = true;
   }
 

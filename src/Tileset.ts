@@ -4,58 +4,7 @@ import Chest from "./Chest.js";
 import { SpriteSheet } from "kontra";
 import Cart from "./Cart.js";
 import Door from "./Door.js";
-
-const CHICKEN_FRAME_COUNT = 10;
-const BLOB_FRAME_COUNT = 7;
-const PLAYER_FRAME_COUNT = 5;
-const CHEST_FRAME_COUNT = 3;
-
-export const CHICKEN_DOWN = 1;
-export const CHICKEN_RIGHT = CHICKEN_DOWN + CHICKEN_FRAME_COUNT;
-export const CHICKEN_UP = CHICKEN_RIGHT + CHICKEN_FRAME_COUNT;
-export const OUTSIDE_TOP_LEFT = CHICKEN_UP + CHICKEN_FRAME_COUNT;
-export const OUTSIDE_TOP = OUTSIDE_TOP_LEFT + 1;
-export const OUTSIDE_TOP_RIGHT = OUTSIDE_TOP + 1;
-export const SHADOW_TOP_LEFT = OUTSIDE_TOP_RIGHT + 1;
-export const FLOOR = SHADOW_TOP_LEFT + 1;
-export const OUTSIDE_LEFT = FLOOR + 1;
-export const WALL = OUTSIDE_LEFT + 1;
-export const OUTSIDE_RIGHT = WALL + 1;
-export const SHADOW_LEFT = OUTSIDE_RIGHT + 1;
-export const INSIDE_BOTTOM_RIGHT = SHADOW_LEFT + 1;
-export const SHADOW_TOP = INSIDE_BOTTOM_RIGHT + 1;
-export const SHADOW_TOP_RIGHT = SHADOW_TOP + 1;
-export const INSIDE_BOTTOM_LEFT = SHADOW_TOP_RIGHT + 1;
-export const OUTSIDE_BOTTOM_LEFT = INSIDE_BOTTOM_LEFT + 1;
-export const OUTSIDE_BOTTOM = OUTSIDE_BOTTOM_LEFT + 1;
-export const OUTSIDE_BOTTOM_RIGHT = OUTSIDE_BOTTOM + 1;
-export const INSIDE_TOP_RIGHT = OUTSIDE_BOTTOM_RIGHT + 1;
-export const INSIDE_TOP_LEFT = INSIDE_TOP_RIGHT + 1;
-export const DOOR_CLOSED = INSIDE_TOP_LEFT + 1;
-export const DOOR_OPEN = DOOR_CLOSED + 1;
-export const SHADOW_HALL_BOTTOM = DOOR_OPEN + 1;
-export const SHADOW_OBJECT_RIGHT = SHADOW_HALL_BOTTOM + 1;
-export const SHADOW_OBJECT_BOTTOM = SHADOW_OBJECT_RIGHT + 1;
-export const OUTSIDE = SHADOW_OBJECT_BOTTOM + 1;
-export const BLOB = OUTSIDE + 1;
-export const PLAYER_DOWN = BLOB + BLOB_FRAME_COUNT;
-export const PLAYER_RIGHT = PLAYER_DOWN + PLAYER_FRAME_COUNT;
-export const PLAYER_UP = PLAYER_RIGHT + PLAYER_FRAME_COUNT;
-export const PLAYER_LAYING_DOWN = PLAYER_UP + PLAYER_FRAME_COUNT;
-export const CART_HORIZONTAL = PLAYER_LAYING_DOWN + 1;
-export const CART_VERTICAL = CART_HORIZONTAL + 1;
-export const CHEST = CART_VERTICAL + 1;
-export const CHEST_SILLY = CHEST + CHEST_FRAME_COUNT;
-
-export const CHICKEN_GO_DOWN = `${CHICKEN_DOWN - 1}..${CHICKEN_DOWN - 1 + CHICKEN_FRAME_COUNT - 1}`;
-export const CHICKEN_GO_RIGHT = `${CHICKEN_RIGHT - 1}..${CHICKEN_RIGHT - 1 + CHICKEN_FRAME_COUNT - 1}`;
-export const CHICKEN_GO_UP = `${CHICKEN_UP - 1}..${CHICKEN_UP - 1 + CHICKEN_FRAME_COUNT - 1}`;
-export const PLAYER_GO_DOWN = `${PLAYER_DOWN - 1}..${PLAYER_DOWN - 1 + PLAYER_FRAME_COUNT - 1}`;
-export const PLAYER_GO_RIGHT = `${PLAYER_RIGHT - 1}..${PLAYER_RIGHT - 1 + PLAYER_FRAME_COUNT - 1}`;
-export const PLAYER_GO_UP = `${PLAYER_UP - 1}..${PLAYER_UP - 1 + PLAYER_FRAME_COUNT - 1}`;
-export const BLOB_GO = `${BLOB - 1}..${BLOB - 1 + BLOB_FRAME_COUNT - 1}`;
-export const CHEST_OPENING = `${CHEST - 1}..${CHEST - 1 + CHEST_FRAME_COUNT - 1}`;
-export const CHEST_OPENING_SILLY = [CHEST, CHEST + 1, CHEST_SILLY];
+import * as sprites from "./sprites.js";
 
 export default class Tileset {
   public image: HTMLImageElement;
@@ -72,28 +21,31 @@ export default class Tileset {
       frameWidth: this.tileWidth,
       frameHeight: this.tileHeight,
       animations: {
-        playerDown: { frames: PLAYER_DOWN - 1 },
-        playerGoDown: { frames: PLAYER_GO_DOWN, frameRate: 10 },
-        playerGoRight: { frames: PLAYER_GO_RIGHT, frameRate: 10 },
-        playerGoUp: { frames: PLAYER_GO_UP, frameRate: 10 },
-        playerGoLeft: { frames: PLAYER_GO_RIGHT, frameRate: 10 },
-        chickenDown: { frames: CHICKEN_DOWN - 1 },
-        chickenGoDown: { frames: CHICKEN_GO_DOWN, frameRate: 10 },
-        chickenRight: { frames: CHICKEN_RIGHT - 1 },
-        chickenGoRight: { frames: CHICKEN_GO_RIGHT, frameRate: 10 },
-        chickenUp: { frames: CHICKEN_UP - 1 },
-        chickenGoUp: { frames: CHICKEN_GO_UP, frameRate: 10 },
-        chickenLeft: { frames: CHICKEN_RIGHT - 1 },
-        chickenGoLeft: { frames: CHICKEN_GO_RIGHT, frameRate: 10 },
-        blob: { frames: BLOB - 1 },
-        blobGo: { frames: BLOB_GO, frameRate: 10 },
-        chestClosed: { frames: CHEST - 1 },
-        chestOpening: { frames: CHEST_OPENING, frameRate: 10 },
-        chestOpeningSilly: { frames: CHEST_OPENING_SILLY, frameRate: 10 },
-        cartHorizontal: { frames: CART_HORIZONTAL - 1 },
-        cartVertical: { frames: CART_VERTICAL - 1 },
-        doorClosed: { frames: DOOR_CLOSED - 1 },
-        doorOpen: { frames: DOOR_OPEN - 1 },
+        playerDown: { frames: sprites.PLAYER_DOWN - 1 },
+        playerGoDown: { frames: sprites.PLAYER_GO_DOWN, frameRate: 10 },
+        playerGoRight: { frames: sprites.PLAYER_GO_RIGHT, frameRate: 10 },
+        playerGoUp: { frames: sprites.PLAYER_GO_UP, frameRate: 10 },
+        playerGoLeft: { frames: sprites.PLAYER_GO_RIGHT, frameRate: 10 },
+        chickenDown: { frames: sprites.CHICKEN_DOWN - 1 },
+        chickenGoDown: { frames: sprites.CHICKEN_GO_DOWN, frameRate: 10 },
+        chickenRight: { frames: sprites.CHICKEN_RIGHT - 1 },
+        chickenGoRight: { frames: sprites.CHICKEN_GO_RIGHT, frameRate: 10 },
+        chickenUp: { frames: sprites.CHICKEN_UP - 1 },
+        chickenGoUp: { frames: sprites.CHICKEN_GO_UP, frameRate: 10 },
+        chickenLeft: { frames: sprites.CHICKEN_RIGHT - 1 },
+        chickenGoLeft: { frames: sprites.CHICKEN_GO_RIGHT, frameRate: 10 },
+        blob: { frames: sprites.BLOB - 1 },
+        blobGo: { frames: sprites.BLOB_GO, frameRate: 10 },
+        chestClosed: { frames: sprites.CHEST - 1 },
+        chestOpening: { frames: sprites.CHEST_OPENING, frameRate: 10 },
+        chestOpeningSilly: {
+          frames: sprites.CHEST_OPENING_SILLY,
+          frameRate: 10,
+        },
+        cartHorizontal: { frames: sprites.CART_HORIZONTAL - 1 },
+        cartVertical: { frames: sprites.CART_VERTICAL - 1 },
+        doorClosed: { frames: sprites.DOOR_CLOSED - 1 },
+        doorOpen: { frames: sprites.DOOR_OPEN - 1, loop: false },
       },
     });
   }
@@ -135,14 +87,15 @@ export default class Tileset {
       x,
       y,
       animations: {
-        atRest: this.sprites.animations.playerDown,
         ...(orientation === "vertical"
           ? {
-              up: this.sprites.animations.cartHorizontal,
-              down: this.sprites.animations.cartHorizontal,
+              atRest: this.sprites.animations.cartVertical,
+              up: this.sprites.animations.cartVertical,
+              down: this.sprites.animations.cartVertical,
             }
           : {
-              right: this.sprites.animations.cartVertical,
+              atRest: this.sprites.animations.cartHorizontal,
+              right: this.sprites.animations.cartHorizontal,
             }),
       },
     });

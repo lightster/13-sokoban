@@ -1,24 +1,14 @@
-export const OBJECT_PLAYER = "P";
-export const OBJECT_BLOB = "B";
-export const OBJECT_CART_HORIZONTAL = "H";
-export const OBJECT_CART_VERTICAL = "V";
-export const OBJECT_CHEST = "C";
-export const OBJECT_DOOR = "E";
-export const OBJECT_CHICKEN_DOWN = "D";
-export const OBJECT_CHICKEN_RIGHT = "R";
-export const OBJECT_CHICKEN_UP = "U";
-export const OBJECT_CHICKEN_LEFT = "L";
-
-export interface MapSpec {
+export interface TiledMap {
   width: number;
   height: number;
-  background: {
+  layers: Array<{
+    name: string;
     data: Array<number>;
-  };
-  structures: {
-    data: Array<number>;
-  };
-  objects: {
-    data: string;
-  };
+  }>;
+}
+
+export interface MapFile {
+  width: number;
+  height: number;
+  layers: Record<string, Array<number>>;
 }
