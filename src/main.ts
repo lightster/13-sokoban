@@ -43,6 +43,9 @@ Tileset.load().then((tileset) => {
       if (keyPressed(["arrowright", "d"])) {
         map.movePlayer(1, 0);
       }
+      if (keyPressed(["r"])) {
+        map.init();
+      }
 
       map.update();
     },
