@@ -7,6 +7,10 @@ function encodeTiledMapToGameMap(json: string): MapFile {
 
   const gameMap: MapFile = { width, height, layers: {} };
   layers.forEach(({ data, name }) => {
+    if (name === "background") {
+      return;
+    }
+
     gameMap.layers[name] = data;
   });
 

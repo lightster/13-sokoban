@@ -14,6 +14,7 @@ import {
   CART_HORIZONTAL,
   BLOB,
   DOOR_CLOSED,
+  OUTSIDE,
 } from "./sprites.js";
 
 type ObjectType = Blob | Cart | Chest | Door | Player;
@@ -59,17 +60,14 @@ export default class Map {
       ],
       layers: [
         {
-          type: "tilelayer",
           name: "background",
-          data: this.mapFile.layers.background,
+          data: Array(this.mapFile.width * this.mapFile.height).fill(OUTSIDE),
         },
         {
-          type: "tilelayer",
           name: "floor",
           data: this.mapFile.layers.floor,
         },
         {
-          type: "tilelayer",
           name: "structures",
           data: this.mapFile.layers.structures,
         },
@@ -167,7 +165,9 @@ export default class Map {
       const cartProposedCoordinate = { x: cartProposedX, y: cartProposedY };
 
       if (
-        this.tileEngine.tileAtLayer("structures", cartProposedCoordinate) ||
+        this.mapFile.layers.structures[
+          this.indexFromCoordinate(cartProposedCoordinate)
+        ] ||
         this.objectAtCoordinate(cartProposedCoordinate)
       ) {
         return;
@@ -178,7 +178,11 @@ export default class Map {
       }
     }
 
-    if (this.tileEngine.tileAtLayer("structures", proposedCoordinate) === 0) {
+    if (
+      !this.mapFile.layers.structures[
+        this.indexFromCoordinate(proposedCoordinate)
+      ]
+    ) {
       this.player.moveTo(proposedX, proposedY);
     }
   }

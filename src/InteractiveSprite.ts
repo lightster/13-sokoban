@@ -1,9 +1,5 @@
 import { angleToTarget, movePoint, SpriteClass, Animation } from "kontra";
 
-type SuperProps = Exclude<
-  ConstructorParameters<typeof SpriteClass>[0],
-  "animations"
->;
 interface Props {
   x: number;
   y: number;

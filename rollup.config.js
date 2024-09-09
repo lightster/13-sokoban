@@ -29,7 +29,6 @@ export default [
         sprite: { animation: true },
         tileEngine: {
           camera: true,
-          query: true,
         },
         debug: isWatching,
       }),
