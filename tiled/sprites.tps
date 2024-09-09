@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>spritesheet-only</string>
         <key>textureFileName</key>
-        <filename></filename>
+        <filename>sprites.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrQualityLevel</key>
@@ -167,30 +167,10 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">sprites/sprites-0.png</key>
-            <key type="filename">sprites/sprites-1.png</key>
-            <key type="filename">sprites/sprites-10.png</key>
-            <key type="filename">sprites/sprites-11.png</key>
-            <key type="filename">sprites/sprites-12.png</key>
-            <key type="filename">sprites/sprites-13.png</key>
-            <key type="filename">sprites/sprites-14.png</key>
             <key type="filename">sprites/sprites-15.png</key>
             <key type="filename">sprites/sprites-16.png</key>
-            <key type="filename">sprites/sprites-17.png</key>
-            <key type="filename">sprites/sprites-18.png</key>
-            <key type="filename">sprites/sprites-19.png</key>
-            <key type="filename">sprites/sprites-2.png</key>
-            <key type="filename">sprites/sprites-20.png</key>
-            <key type="filename">sprites/sprites-21.png</key>
-            <key type="filename">sprites/sprites-22.png</key>
-            <key type="filename">sprites/sprites-23.png</key>
-            <key type="filename">sprites/sprites-24.png</key>
             <key type="filename">sprites/sprites-25.png</key>
             <key type="filename">sprites/sprites-26.png</key>
-            <key type="filename">sprites/sprites-27.png</key>
-            <key type="filename">sprites/sprites-28.png</key>
-            <key type="filename">sprites/sprites-29.png</key>
-            <key type="filename">sprites/sprites-3.png</key>
             <key type="filename">sprites/sprites-30.png</key>
             <key type="filename">sprites/sprites-31.png</key>
             <key type="filename">sprites/sprites-32.png</key>
@@ -200,22 +180,14 @@
             <key type="filename">sprites/sprites-36.png</key>
             <key type="filename">sprites/sprites-37.png</key>
             <key type="filename">sprites/sprites-38.png</key>
-            <key type="filename">sprites/sprites-39.png</key>
-            <key type="filename">sprites/sprites-4.png</key>
             <key type="filename">sprites/sprites-40.png</key>
             <key type="filename">sprites/sprites-41.png</key>
-            <key type="filename">sprites/sprites-42.png</key>
             <key type="filename">sprites/sprites-43.png</key>
             <key type="filename">sprites/sprites-44.png</key>
             <key type="filename">sprites/sprites-45.png</key>
-            <key type="filename">sprites/sprites-46.png</key>
-            <key type="filename">sprites/sprites-47.png</key>
             <key type="filename">sprites/sprites-48.png</key>
             <key type="filename">sprites/sprites-49.png</key>
             <key type="filename">sprites/sprites-5.png</key>
-            <key type="filename">sprites/sprites-50.png</key>
-            <key type="filename">sprites/sprites-51.png</key>
-            <key type="filename">sprites/sprites-52.png</key>
             <key type="filename">sprites/sprites-53.png</key>
             <key type="filename">sprites/sprites-54.png</key>
             <key type="filename">sprites/sprites-55.png</key>
@@ -230,26 +202,11 @@
             <key type="filename">sprites/sprites-63.png</key>
             <key type="filename">sprites/sprites-64.png</key>
             <key type="filename">sprites/sprites-65.png</key>
-            <key type="filename">sprites/sprites-66.png</key>
-            <key type="filename">sprites/sprites-67.png</key>
-            <key type="filename">sprites/sprites-68.png</key>
-            <key type="filename">sprites/sprites-69.png</key>
-            <key type="filename">sprites/sprites-7.png</key>
-            <key type="filename">sprites/sprites-70.png</key>
-            <key type="filename">sprites/sprites-71.png</key>
-            <key type="filename">sprites/sprites-72.png</key>
-            <key type="filename">sprites/sprites-73.png</key>
-            <key type="filename">sprites/sprites-74.png</key>
-            <key type="filename">sprites/sprites-75.png</key>
-            <key type="filename">sprites/sprites-76.png</key>
             <key type="filename">sprites/sprites-77.png</key>
             <key type="filename">sprites/sprites-78.png</key>
             <key type="filename">sprites/sprites-79.png</key>
-            <key type="filename">sprites/sprites-8.png</key>
             <key type="filename">sprites/sprites-80.png</key>
             <key type="filename">sprites/sprites-81.png</key>
-            <key type="filename">sprites/sprites-82.png</key>
-            <key type="filename">sprites/sprites-9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -271,30 +228,6 @@
             <struct type="SpriteSheet">
                 <key>files</key>
                 <array>
-                    <filename>sprites/sprites-0.png</filename>
-                    <filename>sprites/sprites-1.png</filename>
-                    <filename>sprites/sprites-10.png</filename>
-                    <filename>sprites/sprites-11.png</filename>
-                    <filename>sprites/sprites-12.png</filename>
-                    <filename>sprites/sprites-13.png</filename>
-                    <filename>sprites/sprites-14.png</filename>
-                    <filename>sprites/sprites-15.png</filename>
-                    <filename>sprites/sprites-16.png</filename>
-                    <filename>sprites/sprites-17.png</filename>
-                    <filename>sprites/sprites-18.png</filename>
-                    <filename>sprites/sprites-19.png</filename>
-                    <filename>sprites/sprites-2.png</filename>
-                    <filename>sprites/sprites-20.png</filename>
-                    <filename>sprites/sprites-21.png</filename>
-                    <filename>sprites/sprites-22.png</filename>
-                    <filename>sprites/sprites-23.png</filename>
-                    <filename>sprites/sprites-24.png</filename>
-                    <filename>sprites/sprites-25.png</filename>
-                    <filename>sprites/sprites-26.png</filename>
-                    <filename>sprites/sprites-27.png</filename>
-                    <filename>sprites/sprites-28.png</filename>
-                    <filename>sprites/sprites-29.png</filename>
-                    <filename>sprites/sprites-3.png</filename>
                     <filename>sprites/sprites-30.png</filename>
                     <filename>sprites/sprites-31.png</filename>
                     <filename>sprites/sprites-32.png</filename>
@@ -304,22 +237,13 @@
                     <filename>sprites/sprites-36.png</filename>
                     <filename>sprites/sprites-37.png</filename>
                     <filename>sprites/sprites-38.png</filename>
-                    <filename>sprites/sprites-39.png</filename>
-                    <filename>sprites/sprites-4.png</filename>
                     <filename>sprites/sprites-40.png</filename>
                     <filename>sprites/sprites-41.png</filename>
-                    <filename>sprites/sprites-42.png</filename>
                     <filename>sprites/sprites-43.png</filename>
                     <filename>sprites/sprites-44.png</filename>
                     <filename>sprites/sprites-45.png</filename>
-                    <filename>sprites/sprites-46.png</filename>
-                    <filename>sprites/sprites-47.png</filename>
                     <filename>sprites/sprites-48.png</filename>
                     <filename>sprites/sprites-49.png</filename>
-                    <filename>sprites/sprites-5.png</filename>
-                    <filename>sprites/sprites-50.png</filename>
-                    <filename>sprites/sprites-51.png</filename>
-                    <filename>sprites/sprites-52.png</filename>
                     <filename>sprites/sprites-53.png</filename>
                     <filename>sprites/sprites-54.png</filename>
                     <filename>sprites/sprites-55.png</filename>
@@ -327,33 +251,23 @@
                     <filename>sprites/sprites-57.png</filename>
                     <filename>sprites/sprites-58.png</filename>
                     <filename>sprites/sprites-59.png</filename>
-                    <filename>sprites/sprites-6.png</filename>
                     <filename>sprites/sprites-60.png</filename>
                     <filename>sprites/sprites-61.png</filename>
                     <filename>sprites/sprites-62.png</filename>
                     <filename>sprites/sprites-63.png</filename>
                     <filename>sprites/sprites-64.png</filename>
                     <filename>sprites/sprites-65.png</filename>
-                    <filename>sprites/sprites-66.png</filename>
-                    <filename>sprites/sprites-67.png</filename>
-                    <filename>sprites/sprites-68.png</filename>
-                    <filename>sprites/sprites-69.png</filename>
-                    <filename>sprites/sprites-7.png</filename>
-                    <filename>sprites/sprites-70.png</filename>
-                    <filename>sprites/sprites-71.png</filename>
-                    <filename>sprites/sprites-72.png</filename>
-                    <filename>sprites/sprites-73.png</filename>
-                    <filename>sprites/sprites-74.png</filename>
-                    <filename>sprites/sprites-75.png</filename>
-                    <filename>sprites/sprites-76.png</filename>
                     <filename>sprites/sprites-77.png</filename>
                     <filename>sprites/sprites-78.png</filename>
                     <filename>sprites/sprites-79.png</filename>
-                    <filename>sprites/sprites-8.png</filename>
                     <filename>sprites/sprites-80.png</filename>
                     <filename>sprites/sprites-81.png</filename>
-                    <filename>sprites/sprites-82.png</filename>
-                    <filename>sprites/sprites-9.png</filename>
+                    <filename>sprites/sprites-15.png</filename>
+                    <filename>sprites/sprites-16.png</filename>
+                    <filename>sprites/sprites-25.png</filename>
+                    <filename>sprites/sprites-26.png</filename>
+                    <filename>sprites/sprites-5.png</filename>
+                    <filename>sprites/sprites-6.png</filename>
                 </array>
             </struct>
         </map>

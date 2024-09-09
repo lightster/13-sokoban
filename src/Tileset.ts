@@ -23,9 +23,6 @@ export default class Tileset {
       animations: {
         playerDown: { frames: sprites.PLAYER_DOWN - 1 },
         playerGoDown: { frames: sprites.PLAYER_GO_DOWN, frameRate: 10 },
-        playerGoRight: { frames: sprites.PLAYER_GO_RIGHT, frameRate: 10 },
-        playerGoUp: { frames: sprites.PLAYER_GO_UP, frameRate: 10 },
-        playerGoLeft: { frames: sprites.PLAYER_GO_RIGHT, frameRate: 10 },
         chickenDown: { frames: sprites.CHICKEN_DOWN - 1 },
         chickenGoDown: { frames: sprites.CHICKEN_GO_DOWN, frameRate: 10 },
         chickenRight: { frames: sprites.CHICKEN_RIGHT - 1 },
@@ -38,14 +35,14 @@ export default class Tileset {
         blobGo: { frames: sprites.BLOB_GO, frameRate: 10 },
         chestClosed: { frames: sprites.CHEST - 1 },
         chestOpening: { frames: sprites.CHEST_OPENING, frameRate: 10 },
-        chestOpeningSilly: {
-          frames: sprites.CHEST_OPENING_SILLY,
-          frameRate: 10,
-        },
         cartHorizontal: { frames: sprites.CART_HORIZONTAL - 1 },
         cartVertical: { frames: sprites.CART_VERTICAL - 1 },
         doorClosed: { frames: sprites.DOOR_CLOSED - 1 },
-        doorOpen: { frames: sprites.DOOR_OPEN - 1, loop: false },
+        doorOpen: {
+          frames: [sprites.DOOR_CLOSED - 1, sprites.DOOR_OPEN - 1],
+          loop: false,
+          frameRate: 10,
+        },
       },
     });
   }
@@ -67,9 +64,9 @@ export default class Tileset {
       y,
       animations: {
         atRest: this.sprites.animations.playerDown,
-        up: this.sprites.animations.playerGoUp,
+        up: this.sprites.animations.playerGoDown,
         down: this.sprites.animations.playerGoDown,
-        right: this.sprites.animations.playerGoRight,
+        right: this.sprites.animations.playerGoDown,
       },
     });
   }

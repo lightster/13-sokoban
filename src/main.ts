@@ -6,8 +6,8 @@ init();
 initPointer();
 initKeys();
 
-const LAST_MAP_NUMBER = 5;
-let mapNumber = 0;
+const LAST_MAP_COUNT = 6;
+let mapNumber = -1;
 
 Tileset.load().then((tileset) => {
   let map: Map | undefined;
@@ -22,7 +22,7 @@ Tileset.load().then((tileset) => {
       if (!map || map.levelComplete) {
         mapLoading = true;
 
-        mapNumber = (mapNumber + 1) % LAST_MAP_NUMBER;
+        mapNumber = (mapNumber + 1) % LAST_MAP_COUNT;
         Map.load(mapNumber, tileset).then((m) => {
           map = m;
 
