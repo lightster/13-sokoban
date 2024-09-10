@@ -12,6 +12,7 @@ let mapNumber = -1;
 Tileset.load().then((tileset) => {
   let map: Map | undefined;
   let mapLoading: boolean = false;
+  let mapReady: boolean = false;
 
   let loop = GameLoop({
     update: function () {
@@ -21,6 +22,7 @@ Tileset.load().then((tileset) => {
 
       if (!map || map.levelComplete) {
         mapLoading = true;
+        mapReady = false;
 
         mapNumber = (mapNumber + 1) % LAST_MAP_COUNT;
         Map.load(mapNumber, tileset).then((m) => {
@@ -28,6 +30,13 @@ Tileset.load().then((tileset) => {
 
           mapLoading = false;
         });
+        return;
+      }
+
+      if (!mapReady && !keyPressed(["arrowup", "w"])) {
+        mapReady = true;
+      }
+      if (!mapReady) {
         return;
       }
 
