@@ -13,7 +13,7 @@ export default [
     input: "src/main.ts",
     output: {
       file: "build/index.js",
-      format: "iife",
+      format: "cjs",
     },
     plugins: [
       copy({
