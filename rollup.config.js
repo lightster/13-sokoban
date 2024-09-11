@@ -27,9 +27,6 @@ export default [
       kontra({
         gameObject: { scale: true },
         sprite: { animation: true },
-        tileEngine: {
-          camera: true,
-        },
         debug: isWatching,
       }),
       isWatching && serve("build"),

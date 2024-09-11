@@ -131,9 +131,6 @@ export default class Map {
     });
     this.chickens = this.objects.filter((c) => c instanceof Chicken);
 
-    this.objects.forEach((object) => {
-      this.tileEngine?.add(object);
-    });
     this.player = this.objects.find((object) => object instanceof Player);
   }
 
@@ -232,8 +229,8 @@ export default class Map {
   }
 
   render() {
-    this.objects.forEach((o) => o.render());
     this.tileEngine?.render();
+    this.objects.forEach((o) => o.render());
   }
 
   private indexFromCell({ col, row }: { col: number; row: number }): number {
