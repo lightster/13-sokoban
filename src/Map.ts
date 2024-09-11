@@ -27,7 +27,6 @@ type ObjectType = Blob | Cart | Chest | Door | Player;
 export default class Map {
   private mapFile: MapFile;
   private tileset: Tileset;
-  private scene: Scene;
   private objects: Array<ObjectType>;
   private chickens: Array<Chicken>;
   public levelComplete: boolean = false;
@@ -39,7 +38,6 @@ export default class Map {
   constructor(mapFile: MapFile, tileset: Tileset) {
     this.mapFile = mapFile;
     this.tileset = tileset;
-    this.scene = Scene({ id: "map" });
     this.objects = [];
     this.chickens = [];
 
@@ -53,7 +51,6 @@ export default class Map {
   }
 
   init() {
-    this.scene = Scene({ id: "map" });
     this.tileEngine = TileEngine({
       tilewidth: this.tileset.tileWidth, // tile size in pixels
       tileheight: this.tileset.tileHeight,
@@ -136,7 +133,6 @@ export default class Map {
 
     this.objects.forEach((object) => {
       this.tileEngine?.add(object);
-      this.scene.add(object);
     });
     this.player = this.objects.find((object) => object instanceof Player);
   }
@@ -232,11 +228,11 @@ export default class Map {
       }
     });
 
-    this.scene.update();
+    this.objects.forEach((o) => o.update());
   }
 
   render() {
-    this.scene.render();
+    this.objects.forEach((o) => o.render());
     this.tileEngine?.render();
   }
 
