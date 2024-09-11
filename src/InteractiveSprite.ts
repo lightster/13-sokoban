@@ -67,23 +67,16 @@ export default class InteractiveSprite extends SpriteClass {
       return false;
     }
 
-    let scaleX = 1;
-    let translateX = 0;
-    if (this.direction === "left") {
-      scaleX = -1;
-      translateX = 16;
-    }
-
     this.movingTo = { x, y };
     this.playAnimation(direction);
-    this.scaleX = scaleX;
-    this.translateX = translateX;
     return true;
   }
 
   playAnimation(name: string) {
     if (this.currentAnimationName !== name) {
       this.currentAnimationName = name;
+      this.scaleX = this.direction === "left" ? -1 : 1;
+      this.translateX = this.direction === "left" ? 16 : 0;
       super.playAnimation(name);
     }
   }
@@ -110,8 +103,6 @@ export default class InteractiveSprite extends SpriteClass {
       this.x = next.x;
       this.y = next.y;
     } else if (this.currentAnimationName !== "atRest") {
-      this.scaleX = this.direction === "left" ? -1 : 1;
-      this.translateX = this.direction === "left" ? 16 : 0;
       this.playAnimation("atRest");
     }
   }
