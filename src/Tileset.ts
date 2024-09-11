@@ -63,6 +63,7 @@ export default class Tileset {
     return new Player({
       x,
       y,
+      translateY: -4,
       animations: {
         atRest: this.sprites.animations.playerDown,
         up: this.sprites.animations.playerGoDown,
@@ -105,6 +106,7 @@ export default class Tileset {
     return new Blob({
       x,
       y,
+      translateY: -2,
       animations: {
         atRest: this.sprites.animations.blob,
         up: this.sprites.animations.blobGo,
@@ -127,6 +129,7 @@ export default class Tileset {
     return new Chicken({
       x,
       y,
+      translateY: -2,
       direction,
       animations: {
         atRest: this.sprites.animations[`chicken${direction}`],

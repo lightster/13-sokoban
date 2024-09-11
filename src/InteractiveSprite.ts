@@ -3,6 +3,7 @@ import { angleToTarget, movePoint, SpriteClass, Animation } from "kontra";
 interface Props {
   x: number;
   y: number;
+  translateY?: number;
   direction?: "up" | "down" | "left" | "right";
   flipHorizontally?: boolean;
   animations: {
@@ -108,7 +109,7 @@ export default class InteractiveSprite extends SpriteClass {
   }
 
   render() {
-    if (!this.translateX) {
+    if (!this.translateX && !this.translateY) {
       super.render();
       return;
     }
@@ -116,7 +117,7 @@ export default class InteractiveSprite extends SpriteClass {
     const context = this.context;
     context.save();
 
-    this.context.translate(this.translateX, 0);
+    this.context.translate(this.translateX || 0, this.translateY || 0);
 
     super.render();
 
