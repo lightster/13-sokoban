@@ -29,6 +29,11 @@ export const CART_HORIZONTAL = PLAYER_DOWN + PLAYER_FRAME_COUNT;
 export const CART_VERTICAL = CART_HORIZONTAL + 1;
 export const CHEST = CART_VERTICAL + 1;
 
+// Tiled does {tile number} bitwise OR with 0x80000000 to signify horizontally flipped tiles;
+// The number below is CHICKEN_RIGHT | 0x80000000.
+// We hardcode the value because CHICKEN_RIGHT | 0x80000000 causes an overflow in JS.
+export const CHICKEN_LEFT = 2147483651;
+
 export const CHICKEN_GO_DOWN = `${CHICKEN_DOWN - 1}..${CHICKEN_DOWN - 1 + CHICKEN_FRAME_COUNT - 1}`;
 export const CHICKEN_GO_RIGHT = `${CHICKEN_RIGHT - 1}..${CHICKEN_RIGHT - 1 + CHICKEN_FRAME_COUNT - 1}`;
 export const CHICKEN_GO_UP = `${CHICKEN_UP - 1}..${CHICKEN_UP - 1 + CHICKEN_FRAME_COUNT - 1}`;

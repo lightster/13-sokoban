@@ -3,10 +3,13 @@ import { angleToTarget, movePoint, SpriteClass, Animation } from "kontra";
 interface Props {
   x: number;
   y: number;
+  direction?: "up" | "down" | "left" | "right";
+  flipHorizontally?: boolean;
   animations: {
     atRest: Animation;
     up?: Animation;
     down?: Animation;
+    left?: Animation;
     right?: Animation;
   };
 }
@@ -60,25 +63,22 @@ export default class InteractiveSprite extends SpriteClass {
       return false;
     }
 
-    let scaledDirection = direction;
+    if (!this.animations[direction]) {
+      return false;
+    }
+
     let scaleX = 1;
     let translateX = 0;
-    if (direction === "left") {
-      scaledDirection = "right";
+    if (this.direction === "left") {
       scaleX = -1;
       translateX = 16;
     }
 
-    const animationExists = !!this.animations[scaledDirection];
-    if (animationExists) {
-      this.movingTo = { x, y };
-      this.playAnimation(scaledDirection);
-      this.scaleX = scaleX;
-      this.translateX = translateX;
-      return true;
-    }
-
-    return false;
+    this.movingTo = { x, y };
+    this.playAnimation(direction);
+    this.scaleX = scaleX;
+    this.translateX = translateX;
+    return true;
   }
 
   playAnimation(name: string) {
@@ -110,8 +110,8 @@ export default class InteractiveSprite extends SpriteClass {
       this.x = next.x;
       this.y = next.y;
     } else if (this.currentAnimationName !== "atRest") {
-      this.scaleX = 1;
-      this.translateX = 0;
+      this.scaleX = this.direction === "left" ? -1 : 1;
+      this.translateX = this.direction === "left" ? 16 : 0;
       this.playAnimation("atRest");
     }
   }

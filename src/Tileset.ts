@@ -5,6 +5,7 @@ import { SpriteSheet } from "kontra";
 import Cart from "./Cart.js";
 import Door from "./Door.js";
 import * as sprites from "./sprites.js";
+import Chicken from "./Chicken.js";
 
 export default class Tileset {
   public image: HTMLImageElement;
@@ -23,13 +24,13 @@ export default class Tileset {
       animations: {
         playerDown: { frames: sprites.PLAYER_DOWN - 1 },
         playerGoDown: { frames: sprites.PLAYER_GO_DOWN, frameRate: 10 },
-        chickenDown: { frames: sprites.CHICKEN_DOWN - 1 },
+        chickendown: { frames: sprites.CHICKEN_DOWN - 1 },
         chickenGoDown: { frames: sprites.CHICKEN_GO_DOWN, frameRate: 10 },
-        chickenRight: { frames: sprites.CHICKEN_RIGHT - 1 },
+        chickenright: { frames: sprites.CHICKEN_RIGHT - 1 },
         chickenGoRight: { frames: sprites.CHICKEN_GO_RIGHT, frameRate: 10 },
-        chickenUp: { frames: sprites.CHICKEN_UP - 1 },
+        chickenup: { frames: sprites.CHICKEN_UP - 1 },
         chickenGoUp: { frames: sprites.CHICKEN_GO_UP, frameRate: 10 },
-        chickenLeft: { frames: sprites.CHICKEN_RIGHT - 1 },
+        chickenleft: { frames: sprites.CHICKEN_RIGHT - 1 },
         chickenGoLeft: { frames: sprites.CHICKEN_GO_RIGHT, frameRate: 10 },
         blob: { frames: sprites.BLOB - 1 },
         blobGo: { frames: sprites.BLOB_GO, frameRate: 10 },
@@ -66,6 +67,7 @@ export default class Tileset {
         atRest: this.sprites.animations.playerDown,
         up: this.sprites.animations.playerGoDown,
         down: this.sprites.animations.playerGoDown,
+        left: this.sprites.animations.playerGoDown,
         right: this.sprites.animations.playerGoDown,
       },
     });
@@ -92,6 +94,7 @@ export default class Tileset {
             }
           : {
               atRest: this.sprites.animations.cartHorizontal,
+              left: this.sprites.animations.cartHorizontal,
               right: this.sprites.animations.cartHorizontal,
             }),
       },
@@ -106,7 +109,31 @@ export default class Tileset {
         atRest: this.sprites.animations.blob,
         up: this.sprites.animations.blobGo,
         down: this.sprites.animations.blobGo,
+        left: this.sprites.animations.blobGo,
         right: this.sprites.animations.blobGo,
+      },
+    });
+  }
+
+  newChicken({
+    x,
+    y,
+    direction,
+  }: {
+    x: number;
+    y: number;
+    direction: "up" | "down" | "left" | "right";
+  }): Chicken {
+    return new Chicken({
+      x,
+      y,
+      direction,
+      animations: {
+        atRest: this.sprites.animations[`chicken${direction}`],
+        up: this.sprites.animations.chickenGoUp,
+        down: this.sprites.animations.chickenGoDown,
+        left: this.sprites.animations.chickenGoLeft,
+        right: this.sprites.animations.chickenGoRight,
       },
     });
   }

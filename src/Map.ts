@@ -15,7 +15,12 @@ import {
   BLOB,
   DOOR_CLOSED,
   OUTSIDE,
+  CHICKEN_DOWN,
+  CHICKEN_UP,
+  CHICKEN_RIGHT,
+  CHICKEN_LEFT,
 } from "./sprites.js";
+import Chicken from "./Chicken.js";
 
 type ObjectType = Blob | Cart | Chest | Door | Player;
 
@@ -24,6 +29,7 @@ export default class Map {
   private tileset: Tileset;
   private scene: Scene;
   private objects: Array<ObjectType>;
+  private chickens: Array<Chicken>;
   public levelComplete: boolean = false;
 
   // fields initialized in init instead of constructor to allow for reinit
@@ -35,6 +41,7 @@ export default class Map {
     this.tileset = tileset;
     this.scene = Scene({ id: "map" });
     this.objects = [];
+    this.chickens = [];
 
     this.init();
   }
@@ -100,17 +107,32 @@ export default class Map {
       }
 
       if (tile === BLOB) {
-        return this.tileset.newBlob({
-          ...coord,
-        });
+        return this.tileset.newBlob(coord);
       }
 
       if (tile === DOOR_CLOSED) {
         return this.tileset.newDoor(coord);
       }
 
+      if (tile === CHICKEN_UP) {
+        return this.tileset.newChicken({ ...coord, direction: "up" });
+      }
+
+      if (tile === CHICKEN_DOWN) {
+        return this.tileset.newChicken({ ...coord, direction: "down" });
+      }
+
+      if (tile === CHICKEN_LEFT) {
+        return this.tileset.newChicken({ ...coord, direction: "left" });
+      }
+
+      if (tile === CHICKEN_RIGHT) {
+        return this.tileset.newChicken({ ...coord, direction: "right" });
+      }
+
       return [];
     });
+    this.chickens = this.objects.filter((c) => c instanceof Chicken);
 
     this.objects.forEach((object) => {
       this.tileEngine?.add(object);
@@ -188,6 +210,28 @@ export default class Map {
   }
 
   update() {
+    this.chickens.forEach((chicken) => {
+      const proposedCoordinate = { x: chicken.x, y: chicken.y };
+      if (chicken.direction === "left") {
+        proposedCoordinate.x -= 16;
+      } else if (chicken.direction === "right") {
+        proposedCoordinate.x += 16;
+      } else if (chicken.direction === "up") {
+        proposedCoordinate.y -= 16;
+      } else if (chicken.direction === "down") {
+        proposedCoordinate.y += 16;
+      }
+
+      if (
+        !this.mapFile.layers.structures[
+          this.indexFromCoordinate(proposedCoordinate)
+        ] &&
+        !this.objectAtCoordinate(proposedCoordinate)
+      ) {
+        chicken.moveTo(proposedCoordinate.x, proposedCoordinate.y);
+      }
+    });
+
     this.scene.update();
   }
 
