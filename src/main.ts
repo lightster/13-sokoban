@@ -6,7 +6,7 @@ init();
 initPointer();
 initKeys();
 
-const LAST_MAP_COUNT = 9;
+const LAST_MAP_COUNT = 10;
 let mapNumber = -1;
 
 Tileset.load().then((tileset) => {
