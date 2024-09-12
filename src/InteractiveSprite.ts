@@ -76,8 +76,10 @@ export default class InteractiveSprite extends SpriteClass {
   playAnimation(name: string) {
     if (this.currentAnimationName !== name) {
       this.currentAnimationName = name;
-      this.scaleX = this.direction === "left" ? -1 : 1;
-      this.translateX = this.direction === "left" ? 16 : 0;
+      const flipHorizontally =
+        (this.direction === "left" && name == "atRest") || name === "left";
+      this.scaleX = flipHorizontally ? -1 : 1;
+      this.translateX = flipHorizontally ? 16 : 0;
       super.playAnimation(name);
     }
   }
